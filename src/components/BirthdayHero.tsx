@@ -1,9 +1,47 @@
 import { Cake, Star, Sparkles } from "lucide-react";
 import bossPhoto from "@/assets/boss-photo.jpg";
+import Fireworks from "./Fireworks";
+import FireworkButton from "./FireworkButton";
+import { useState } from "react";
 
 const BirthdayHero = () => {
+  const [manualFireworks, setManualFireworks] = useState<Array<{x: number, y: number, id: number}>>([]);
+
+  const createManualFirework = (x: number, y: number) => {
+    const newFirework = { x, y, id: Date.now() };
+    setManualFireworks(prev => [...prev, newFirework]);
+    
+    // Remove after animation
+    setTimeout(() => {
+      setManualFireworks(prev => prev.filter(fw => fw.id !== newFirework.id));
+    }, 1000);
+  };
   return (
     <div className="relative min-h-screen bg-gradient-hero flex items-center justify-center overflow-hidden">
+      {/* Automatic Fireworks */}
+      <Fireworks active={true} />
+      
+      {/* Manual Fireworks */}
+      {manualFireworks.map(firework => (
+        <div
+          key={firework.id}
+          className="fixed pointer-events-none z-40"
+          style={{ left: firework.x, top: firework.y }}
+        >
+          <div className="relative">
+            {Array.from({ length: 12 }).map((_, i) => (
+              <div
+                key={i}
+                className="absolute w-2 h-2 bg-accent rounded-full animate-firework"
+                style={{
+                  transform: `rotate(${i * 30}deg) translateY(-50px)`,
+                  animationDelay: `${i * 0.05}s`,
+                }}
+              />
+            ))}
+          </div>
+        </div>
+      ))}
       {/* Decorative elements */}
       <div className="absolute inset-0">
         <div className="absolute top-20 left-20 animate-float">
@@ -54,6 +92,11 @@ const BirthdayHero = () => {
           {/* Decorative Border */}
           <div className="flex justify-center animate-slide-up" style={{ animationDelay: '600ms' }}>
             <div className="w-32 h-1 bg-gradient-to-r from-transparent via-accent to-transparent rounded-full"></div>
+          </div>
+          
+          {/* Firework Button */}
+          <div className="flex justify-center animate-slide-up" style={{ animationDelay: '900ms' }}>
+            <FireworkButton onFirework={createManualFirework} />
           </div>
         </div>
       </div>
