@@ -49,11 +49,6 @@ const Fireworks = ({ active = true }: FireworkProps) => {
     }
 
     setParticles(prev => [...prev, ...newParticles]);
-    
-    // Play firework sound effect
-    if (window.playFireworkSound) {
-      window.playFireworkSound();
-    }
   };
 
   useEffect(() => {

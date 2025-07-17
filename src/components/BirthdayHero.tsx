@@ -2,8 +2,6 @@ import { Cake, Star, Sparkles } from "lucide-react";
 import bossPhoto from "@/assets/boss-photo.jpg";
 import Fireworks from "./Fireworks";
 import FireworkButton from "./FireworkButton";
-import SoundManager from "./SoundManager";
-import FloatingBalloons from "./FloatingBalloons";
 import { useState } from "react";
 
 const BirthdayHero = () => {
@@ -20,12 +18,6 @@ const BirthdayHero = () => {
   };
   return (
     <div className="relative min-h-screen bg-gradient-hero flex items-center justify-center overflow-hidden">
-      {/* Sound Controls */}
-      <SoundManager />
-      
-      {/* Floating Balloons */}
-      <FloatingBalloons />
-      
       {/* Automatic Fireworks */}
       <Fireworks active={true} />
       
