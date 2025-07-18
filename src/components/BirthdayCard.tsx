@@ -23,9 +23,10 @@ const BirthdayCard = ({ name, message, delay = 0 }: BirthdayCardProps) => {
 
         <div className="space-y-3">
           <h3 className="text-lg font-semibold text-elegant">{name}</h3>
-          <p className="text-muted-foreground leading-relaxed italic">
-            "{message}"
-          </p>
+          <p
+            className="text-muted-foreground leading-relaxed italic"
+            dangerouslySetInnerHTML={{ __html: message }}
+          />
         </div>
 
         <div className="flex justify-end">
